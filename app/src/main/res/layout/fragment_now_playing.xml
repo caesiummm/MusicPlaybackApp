@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    tools:context=".NowPlayingFragment"
+    tools:context=".fragment.NowPlayingFragment"
     android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +48,7 @@
             android:layout_marginStart="10dp"
             android:text="Name of Artist"
             android:textColor="@color/mint_green"
-            android:textSize="10sp"
+            android:textSize="11sp"
             app:flow_verticalBias="0.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/now_playing_cover_image"

@@ -1,20 +1,14 @@
-package com.example.mymusic
+package com.example.mymusic.dataClass
 
-import android.media.MediaMetadataRetriever
-import android.media.MediaPlayer
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
-import android.view.PixelCopy.Request
 import android.widget.SeekBar
-import androidx.core.net.toUri
-import okhttp3.internal.http2.Header
-import retrofit2.http.HEAD
-import retrofit2.http.HeaderMap
-import retrofit2.http.Headers
+import com.example.mymusic.R
+import com.example.mymusic.SongPlaybackActivity
 import java.lang.Exception
-import kotlin.system.exitProcess
 
+@Suppress("DEPRECATION")
 data class Data(
     val album: Album,
     val artist: Artist,
@@ -85,16 +79,6 @@ data class Data(
         }
     }
 }
-
-//fun exitApplication(){
-//    if(SongPlaybackActivity.playbackService != null){
-//        SongPlaybackActivity.playbackService!!.audioManager.abandonAudioFocus(SongPlaybackActivity.playbackService)
-//        SongPlaybackActivity.playbackService!!.stopForeground(true)
-//        SongPlaybackActivity.playbackService!!.mediaPlayer!!.release()
-//        SongPlaybackActivity.playbackService = null
-//    }
-//    exitProcess(1)
-//}
 
 fun setSongPosition(increment: Boolean) {
     if(increment) {

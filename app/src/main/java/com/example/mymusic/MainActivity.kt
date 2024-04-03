@@ -1,12 +1,12 @@
 package com.example.mymusic
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.mymusic.databinding.ActivityMainBinding
+import com.example.mymusic.fragment.LibraryFragment
+import com.example.mymusic.fragment.ProfileFragment
+import com.example.mymusic.fragment.SongsFragment
 import kotlin.system.exitProcess
 
 open class MainActivity : AppCompatActivity() {
@@ -17,7 +17,6 @@ open class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d(Short.toString(), "MainActivity onCreate here!!")
         replaceFragment(SongsFragment())
 
         binding.bottomNavBar.setOnItemSelectedListener {
@@ -33,8 +32,6 @@ open class MainActivity : AppCompatActivity() {
 
     open fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
-        Log.d("replaceFragment", fragmentManager.toString())
-
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_nav, fragment)
         fragmentTransaction.commit()

@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/azure"
-    tools:context=".SongsFragment">
+    tools:context=".fragment.SongsFragment">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_songs_bg"/>
+            android:background="@drawable/gradient_activity_bg"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/aboveTextView"

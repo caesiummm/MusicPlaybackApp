@@ -1,7 +1,6 @@
 package com.example.mymusic
 
 import android.annotation.SuppressLint
-import android.app.Service
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -12,19 +11,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
 import android.util.Log
-import android.widget.SeekBar
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import androidx.fragment.app.Fragment
+import com.example.mymusic.dataClass.Data
+import com.example.mymusic.dataClass.monitorSongProgress
+import com.example.mymusic.dataClass.setSongPosition
 import com.example.mymusic.databinding.ActivitySongPlaybackBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.delay
-import java.lang.Exception
-import java.lang.RuntimeException
+import com.example.mymusic.service.BackgroundPlaybackService
 
 class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
 
@@ -95,9 +92,9 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
         val editor = sharedPreferences.edit()
 
         binding.apply {
-            binding.btnLike.setOnClickListener {
+            binding.btnLike.setOnClickListener {// When the like button is clicked
                 val likedSong = songsList!![currentSongIndex]
-                if(!isLiked) {
+                if(!isLiked) { // If the song is NOT liked
                     likedSongsList.add(likedSong)
                     Log.d("Adding My Liked Songs", likedSongsList.size.toString())
 
@@ -105,16 +102,14 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
                     val json = gson.toJson(likedSongsList)
                     editor.apply {
                         putString("likedSongs", json)
-                        putBoolean("isLiked", true)
+                        putBoolean("isLiked", true) // save like that
                         apply()
                     }
-
                     binding.btnLike.setImageResource(R.drawable.ic_like_filled)
                     Toast.makeText(this@SongPlaybackActivity, "Saved to liked music", Toast.LENGTH_SHORT).show()
                 }
-                else {
+                else { // If the song is ALREADY liked
                     likedSongsList.remove(likedSong)
-                    //likedSongAdapter.notifyDataSetChanged()
                     Log.d("Removing My Liked Songs", likedSongsList.size.toString())
 
                     editor.apply {
@@ -165,8 +160,7 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
     }
 
     private fun togglePlayback() {
-        // When the song is already playing
-        if (isPlaying) {
+        if (isPlaying) { // When the song is already playing
             isPlaying = false
             playbackService!!.mediaPlayer!!.pause()
             playbackService!!.showNotification()
@@ -202,6 +196,7 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
             isPlaying = true
             binding.btnPlayPause.setImageResource(R.drawable.ic_pause)
         }
+        //playbackService!!.updatePlaybackState(isPlaying = true, playbackService!!.mediaPlayer!!.currentPosition.toLong(), 1F)
         playbackService!!.showNotification()
 
         // After song finishes
@@ -225,10 +220,6 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
         Log.d("Is this song liked?", isLiked.toString())
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
         Log.d("onServiceConnected", "Connecting to Playback Service")
         if (playbackService ==  null) {
@@ -236,7 +227,6 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
             playbackService = binder.currentService()
             playbackService!!.audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             playbackService!!.audioManager.requestAudioFocus(playbackService, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
-            //playbackService!!.updatePlaybackState(isPlaying = true, playbackService!!.mediaPlayer!!.currentPosition.toLong(), playbackSpeed = 1F)
         }
         initializeMusicPlayer()
     }
@@ -245,10 +235,4 @@ class SongPlaybackActivity : AppCompatActivity(), ServiceConnection {
         Log.d("onServiceDisconnected", "Disconnecting Playback Service")
         playbackService = null
     }
-
-//    @Deprecated("Deprecated in Java")
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        supportFragmentManager.popBackStack()
-//    }
 }

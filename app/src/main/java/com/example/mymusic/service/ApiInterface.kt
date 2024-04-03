@@ -1,5 +1,6 @@
-package com.example.mymusic
+package com.example.mymusic.service
 
+import com.example.mymusic.dataClass.Tracks
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

@@ -1,4 +1,4 @@
-package com.example.mymusic
+package com.example.mymusic.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.mymusic.service.ApiInterface
+import com.example.mymusic.SongPlaybackActivity
+import com.example.mymusic.adapter.SongAdapter
+import com.example.mymusic.dataClass.Data
+import com.example.mymusic.dataClass.Tracks
 import com.example.mymusic.databinding.FragmentSongsBinding
-import com.google.android.material.search.SearchBar
-import com.google.android.material.search.SearchView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,8 +53,8 @@ class SongsFragment : Fragment() {
         val retrofitData = retrofitBuilder.getData("eminem")
 
         retrofitData.enqueue(object : Callback<Tracks?> {
+            // Success API call
             override fun onResponse(call: Call<Tracks?>, response: Response<Tracks?>) {
-                // Success API call
                 dataList = response.body()?.data!!
                 Log.d("DataList", dataList.toString())
 
@@ -70,8 +72,8 @@ class SongsFragment : Fragment() {
                 Log.d("TAG: onResponse", "onResponse: " + response.body())
             }
 
+            // Failed API call
             override fun onFailure(call: Call<Tracks?>, t: Throwable) {
-                // Failed API call
                 Log.d("TAG: onFailure", "onFailure: " + t.message)
             }
         })
@@ -86,17 +88,6 @@ class SongsFragment : Fragment() {
                 return true
             }
         })
-
-//        binding.recyclerViewSongList.addOnScrollListener(object: RecyclerView.OnScrollListener(){
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                if (!binding.recyclerViewSongList.canScrollVertically(1)) {
-//                    binding.numberOfTracksLayout.visibility = View.VISIBLE
-//                } else {
-//                    binding.numberOfTracksLayout.visibility = View.GONE
-//                }
-//            }
-//        })
     }
 
     private fun filterSongList(query: String?) {

@@ -1,8 +1,9 @@
-package com.example.mymusic
+package com.example.mymusic.dataClass
 
 import android.os.Parcel
 import android.os.Parcelable
 
+@Suppress("DEPRECATION")
 data class LikedSongs(
     val id: Long,
     val album: Album,

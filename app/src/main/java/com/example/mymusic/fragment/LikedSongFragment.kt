@@ -1,4 +1,4 @@
-package com.example.mymusic
+package com.example.mymusic.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -9,11 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mymusic.databinding.FragmentLibraryBinding
+import com.example.mymusic.SongPlaybackActivity
+import com.example.mymusic.adapter.LikedSongAdapter
+import com.example.mymusic.dataClass.Data
 import com.example.mymusic.databinding.FragmentLikedSongBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.io.Serializable
 
 class LikedSongFragment : Fragment() {
     private var _binding: FragmentLikedSongBinding? = null
@@ -26,7 +27,7 @@ class LikedSongFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentLikedSongBinding.inflate(inflater, container, false)
         return binding.root

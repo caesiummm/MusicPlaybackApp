@@ -4,9 +4,8 @@ import android.app.Service.STOP_FOREGROUND_REMOVE
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.media.MediaPlayer
-import android.widget.Toast
-import androidx.core.net.toUri
+import com.example.mymusic.dataClass.setSongPosition
+import com.example.mymusic.fragment.NowPlayingFragment
 import com.squareup.picasso.Picasso
 import kotlin.system.exitProcess
 

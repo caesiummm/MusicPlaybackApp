@@ -1,4 +1,4 @@
-package com.example.mymusic
+package com.example.mymusic.service
 
 import android.app.Notification
 import android.app.PendingIntent
@@ -10,18 +10,21 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.media.session.PlaybackState
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
-import android.provider.MediaStore.Audio
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.example.mymusic.ApplicationClass
+import com.example.mymusic.NotificationReceiver
+import com.example.mymusic.R
+import com.example.mymusic.SongPlaybackActivity
+import com.example.mymusic.dataClass.setSongPosition
+import com.example.mymusic.fragment.NowPlayingFragment
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 import kotlin.system.exitProcess
@@ -68,16 +71,24 @@ class BackgroundPlaybackService : Service(), AudioManager.OnAudioFocusChangeList
         val intent = Intent(baseContext, SongPlaybackActivity::class.java).apply { addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP) }
         val contentIntent = PendingIntent.getActivity(this, 0, intent, flag)
 
-        val prevIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(ApplicationClass.PREVIOUS)
+        val prevIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(
+            ApplicationClass.PREVIOUS
+        )
         val prevPendingIntent = PendingIntent.getBroadcast(baseContext, 0, prevIntent, flag)
 
-        val playIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(ApplicationClass.PLAY)
+        val playIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(
+            ApplicationClass.PLAY
+        )
         val playPendingIntent = PendingIntent.getBroadcast(baseContext, 0, playIntent, flag)
 
-        val nextIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(ApplicationClass.NEXT)
+        val nextIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(
+            ApplicationClass.NEXT
+        )
         val nextPendingIntent = PendingIntent.getBroadcast(baseContext, 0, nextIntent, flag)
 
-        val exitIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(ApplicationClass.EXIT)
+        val exitIntent = Intent(baseContext, NotificationReceiver::class.java).setAction(
+            ApplicationClass.EXIT
+        )
         val exitPendingIntent = PendingIntent.getBroadcast(baseContext, 0, exitIntent, flag)
 
         val coverImageUrl = SongPlaybackActivity.songsList!![SongPlaybackActivity.currentSongIndex].album.cover
@@ -92,10 +103,6 @@ class BackgroundPlaybackService : Service(), AudioManager.OnAudioFocusChangeList
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setOnlyAlertOnce(true)
-//                    .addAction(R.drawable.ic_skip_prev_noti_small, "Previous", prevPendingIntent)
-//                    .addAction(playPauseBtn, "Play", playPendingIntent)
-//                    .addAction(R.drawable.ic_skip_next_noti_small, "Next", nextPendingIntent)
-//                    .addAction(R.drawable.ic_noti_exit, "Exit", exitPendingIntent)
                     .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
                         .setMediaSession(mediaSession.sessionToken))
                     .build()
@@ -104,7 +111,9 @@ class BackgroundPlaybackService : Service(), AudioManager.OnAudioFocusChangeList
             override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
                 Log.d("onBitmapFailed", "Loading placeholder icon notification")
                 NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
-                    .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.music_player_icon))
+                    .setLargeIcon(BitmapFactory.decodeResource(resources,
+                        R.drawable.music_player_icon
+                    ))
                     .build()
             }
 
@@ -123,6 +132,11 @@ class BackgroundPlaybackService : Service(), AudioManager.OnAudioFocusChangeList
 
             updatePlaybackState(SongPlaybackActivity.isPlaying, mediaPlayer!!.currentPosition.toLong(), playbackSpeed)
             mediaSession.setCallback(object: MediaSessionCompat.Callback() {
+                override fun onPrepare() {
+                    super.onPrepare()
+                    updatePlaybackState(isPlaying = true, mediaPlayer!!.currentPosition.toLong(), 1F)
+                }
+
                 // When play button in notification is pressed
                 override fun onPlay() {
                     super.onPlay()

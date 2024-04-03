@@ -1,4 +1,4 @@
-package com.example.mymusic
+package com.example.mymusic.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
+import com.example.mymusic.adapter.LibraryViewPagerAdapter
 import com.example.mymusic.databinding.FragmentLibraryBinding
-import com.example.mymusic.databinding.FragmentSongsBinding
 import com.google.android.material.tabs.TabLayout
 
 class LibraryFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.mymusic
+package com.example.mymusic.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mymusic.dataClass.Data
+import com.example.mymusic.R
+import com.example.mymusic.fragment.SongsFragment
 import com.squareup.picasso.Picasso
 
 class SongAdapter(private val context: SongsFragment,

@@ -1,27 +1,27 @@
-package com.example.mymusic
+package com.example.mymusic.dataClass
 
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Artist(
+data class Album(
+    val cover: String,
+    val cover_big: String,
+    val cover_medium: String,
+    val cover_small: String,
+    val cover_xl: String,
     val id: Int,
-    val link: String,
-    val name: String,
-    val picture: String,
-    val picture_big: String,
-    val picture_medium: String,
-    val picture_small: String,
-    val picture_xl: String,
+    val md5_image: String,
+    val title: String,
     val tracklist: String,
     val type: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readInt(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -30,14 +30,14 @@ data class Artist(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(cover)
+        parcel.writeString(cover_big)
+        parcel.writeString(cover_medium)
+        parcel.writeString(cover_small)
+        parcel.writeString(cover_xl)
         parcel.writeInt(id)
-        parcel.writeString(link)
-        parcel.writeString(name)
-        parcel.writeString(picture)
-        parcel.writeString(picture_big)
-        parcel.writeString(picture_medium)
-        parcel.writeString(picture_small)
-        parcel.writeString(picture_xl)
+        parcel.writeString(md5_image)
+        parcel.writeString(title)
         parcel.writeString(tracklist)
         parcel.writeString(type)
     }
@@ -46,13 +46,14 @@ data class Artist(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Artist> {
-        override fun createFromParcel(parcel: Parcel): Artist {
-            return Artist(parcel)
+    companion object CREATOR : Parcelable.Creator<Album> {
+        override fun createFromParcel(parcel: Parcel): Album {
+            return Album(parcel)
         }
 
-        override fun newArray(size: Int): Array<Artist?> {
+        override fun newArray(size: Int): Array<Album?> {
             return arrayOfNulls(size)
         }
     }
 }
+

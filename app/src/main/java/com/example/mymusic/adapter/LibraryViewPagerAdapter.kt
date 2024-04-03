@@ -1,9 +1,11 @@
-package com.example.mymusic
+package com.example.mymusic.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.mymusic.fragment.LikedSongFragment
+import com.example.mymusic.fragment.PlaylistFragment
 
 class LibraryViewPagerAdapter(
     fragmentManager: FragmentManager,

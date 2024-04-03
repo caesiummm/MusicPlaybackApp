@@ -21,7 +21,7 @@
         tools:targetApi="31">
 
         <service
-            android:name=".BackgroundPlaybackService"
+            android:name=".service.BackgroundPlaybackService"
             android:foregroundServiceType="mediaPlayback"
             android:exported="true">
             <intent-filter>
