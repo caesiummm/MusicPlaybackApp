@@ -2,4 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_green">#021213</color>
+    <color name="light_cyan">#D4EAED</color>
+    <color name="moonstone">#48A1AD</color>
+    <color name="light_blue">#B7DCE1</color>
+    <color name="mint_green">#D9FCFC</color>
+    <color name="azure">#ECFDFD</color>
+    <color name="ash_gray">#AEBFC1</color>
+
+    <color name="rose_wood">#520000</color>
+    <color name="grey_1">#EBEBEB</color>
+    <color name="grey_2">#E0E0E0</color>
+    <color name="grey_3">#D6D6D6</color>
+    <color name="grey_4">#CCCCCC</color>
+    <color name="grey_6">#B8B8B8</color>
+    <color name="licorice">#140000</color>
+    <color name="red_bean">#3D0000</color>
+    <color name="black_bean">#290000</color>
+    <color name="light_coral">#E78888</color>
 </resources>

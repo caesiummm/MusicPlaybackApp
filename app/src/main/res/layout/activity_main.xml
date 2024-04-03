@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="@drawable/gradient_songs_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <FrameLayout
-        android:id="@+id/frame_layout"
+        android:id="@+id/fragment_nav"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
@@ -16,10 +17,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_playback"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:name="com.example.mymusic.NowPlayingFragment"
+        tools:layout="@layout/fragment_now_playing"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_bar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
+        app:itemIconSize="20dp"
+        app:itemIconTint="@color/grey_1"
+        app:itemTextColor="@color/grey_1"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
+        app:itemTextAppearanceInactive="@color/ash_gray"
+        app:itemTextAppearanceActiveBoldEnabled="true"
+        app:itemRippleColor="@color/grey_1"
+        android:background="@color/licorice"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

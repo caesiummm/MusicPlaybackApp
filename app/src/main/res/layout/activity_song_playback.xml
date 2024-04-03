@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_bean"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".SongPlaybackActivity">
+
+    <ImageButton
+        android:id="@+id/btn_minimize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_down"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/song_playback_cover"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/placeholder_cover"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/song_playback_title"
+        app:layout_constraintTop_toBottomOf="@+id/btn_minimize"/>
+
+    <TextView
+        android:id="@+id/song_playback_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="2dp"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:textColor="@color/grey_2"
+        android:layout_marginTop="23dp"
+        android:text="This is a Very Long Song Title by two Famous Artists"
+        app:layout_constraintTop_toBottomOf="@id/song_playback_cover"
+        app:layout_constraintStart_toStartOf="@id/song_playback_cover"
+        app:layout_constraintEnd_toEndOf="@id/song_playback_cover"/>
+
+    <TextView
+        android:id="@+id/song_playback_artist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/grey_4"
+        android:layout_marginVertical="3dp"
+        android:text="Josh Brolin (feat. Tom Cruise)"
+        app:layout_constraintTop_toBottomOf="@id/song_playback_title"
+        app:layout_constraintBottom_toTopOf="@id/section_btn_add_to_list"
+        app:layout_constraintStart_toStartOf="@id/song_playback_cover"
+        app:layout_constraintEnd_toEndOf="@id/song_playback_cover"/>
+
+    <LinearLayout
+        android:id="@+id/section_btn_add_to_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/song_playback_artist"
+        app:layout_constraintBottom_toTopOf="@id/song_playback_seek_bar"
+        app:layout_constraintStart_toStartOf="@id/song_playback_cover"
+        app:layout_constraintEnd_toEndOf="@id/song_playback_cover">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_like"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="6dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/rounded_button"
+            android:src="@drawable/ic_like_outlined"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_add_to_playlist"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/rounded_button"
+            android:src="@drawable/ic_playlist_add"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_share_song"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="6dp"
+            android:background="@drawable/rounded_button"
+            android:src="@drawable/ic_share"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/song_playback_seek_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:thumbTint="@color/grey_1"
+        android:progressTint="@color/grey_1"
+        android:progressBackgroundTint="@color/grey_6"
+        app:layout_constraintTop_toBottomOf="@id/section_btn_add_to_list"
+        app:layout_constraintBottom_toTopOf="@id/time_seekbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/time_seekbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintTop_toBottomOf="@id/song_playback_seek_bar"
+        app:layout_constraintStart_toStartOf="@id/song_playback_seek_bar"
+        app:layout_constraintEnd_toEndOf="@id/song_playback_seek_bar">
+
+        <TextView
+            android:id="@+id/time_song_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:00"
+            android:textColor="@color/grey_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/time_song_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:00"
+            android:textColor="@color/grey_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_playback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_seekbar">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_skip_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_skip_previous"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_play_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_pause"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_skip_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_skip_next"/>
+
+        </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
